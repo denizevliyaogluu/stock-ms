@@ -76,20 +76,20 @@ public class Borrower {
 
      public double totalFine(){
         double totalFine = 0;;
-        for(Loan 1 : loan){
-            totalFine += 1.calculateFine();
+        for(Loan l : loan){
+            totalFine += l.calculateFine();
          }
         return totalFine;
      }
 
      public void updateFine(double finePaid){
         double fine = 0;
-        for(Loan 1 : loan){
+        for(Loan l : loan){
             if(finePaid <= 0){
                 break;
             }else{
-                fine = 1.getTotalFine();
-                1.setTotalFine(fine - finePaid);
+                fine = l.getTotalFine();
+                l.setTotalFine(fine - finePaid);
                 finePaid -= fine;
             }
          }

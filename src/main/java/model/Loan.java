@@ -1,6 +1,10 @@
 package model;
 
 import jakarta.persistence.*;
+import util.Helper;
+
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 @Entity
 @Table(name = "Loan")
@@ -22,6 +26,8 @@ public class Loan {
     @Column(name = "total_fine")
     private double totalFine;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Item item;
     @ManyToOne(fetch = FetchType.LAZY)
     private Borrower borrower;
 
