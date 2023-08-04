@@ -49,6 +49,10 @@ public class Loan {
         this.totalFine = totalFine;
     }
 
+    public Item getItem() {
+        return item;
+    }
+
     public Borrower getBorrower() {
         return borrower;
     }
@@ -69,8 +73,42 @@ public class Loan {
         this.loanDuration = loanDuration;
     }
 
+    public void setItem(Item item) {
+        this.item = item;
+
+    }
+
     public void setBorrower(Borrower borrower) {
         this.borrower = borrower;
+    }
+
+    public void setReturnDate() {
+        returnDate = Helper.getCurrentTime();
+    }
+
+    public double calculateFine() {
+        double _totalFine = 0;
+        double fineRate = 0;
+        try {
+            if (!returnDate.isEmpty()) {
+                if (item.getItemType().getTypeName().equalsIgnoreCase("High Precedence")) {
+                    fineRate = Helper.highPrecedenceFineRate;
+                }
+                fineRate = Helper.lowPrecedenceFineRate;
+                Date _issueDate = Helper.convertStringToDate(issueDate);
+                Date _returnDate = Helper.convertStringToDate(returnDate);
+                long daysBetween = ChronoUnit.DAYS.between(_issueDate.toInstant(), _returnDate.toInstant());
+                if (daysBetween > 0) {
+                    _totalFine = daysBetween * fineRate;
+                } else {
+                    _totalFine = 0;
+                }
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Null Pointer Exception Caught");
+        }
+        totalFine = _totalFine;
+        return _totalFine;
     }
 
     @Override
