@@ -1,9 +1,9 @@
 package repo;
 
-import model.Borrower;
+import model.ItemType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BorrowerRepository extends JpaRepository<Borrower, Long> {
+public interface ItemTypeRepository extends JpaRepository<ItemType, Long> {
 }
